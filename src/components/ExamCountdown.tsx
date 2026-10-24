@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Card } from '@/components/ui/card';
-import { Clock, Calendar, Trophy } from 'lucide-react';
+import { Clock, Calendar } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 
 interface TimeLeft {
@@ -73,87 +72,30 @@ const ExamCountdown = () => {
   }, [examSetting]);
 
   const TimeBlock = ({ value, label }: { value: number; label: string }) => (
-    <div className="flex flex-col items-center">
-      <div className="bg-gradient-to-br from-blue-600 to-indigo-700 text-white rounded-xl w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center shadow-lg border-2 border-blue-400/30">
-        <span className="text-2xl sm:text-3xl font-bold">{value.toString().padStart(2, '0')}</span>
+    <div className="text-center min-w-0">
+      <div className="bg-primary-light text-primary rounded-md h-14 sm:h-16 flex items-center justify-center tabular-nums">
+        <span className="text-xl sm:text-2xl font-bold">{value.toString().padStart(2, '0')}</span>
       </div>
-      <span className="text-xs sm:text-sm font-medium text-blue-700 mt-2 uppercase tracking-wider">{label}</span>
+      <span className="text-xs text-muted-foreground block mt-2">{label}</span>
     </div>
   );
 
-  if (loading) {
-    return (
-      <Card className="bg-gradient-to-br from-white via-blue-50 to-indigo-50 p-6 sm:p-8 rounded-2xl shadow-xl border-2 border-blue-200/50">
-        <div className="animate-pulse flex flex-col items-center">
-          <div className="h-6 bg-blue-200 rounded w-32 mb-4"></div>
-          <div className="flex gap-4">
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="w-16 h-16 sm:w-20 sm:h-20 bg-blue-200 rounded-xl"></div>
-            ))}
-          </div>
-        </div>
-      </Card>
-    );
-  }
-
-  if (!examSetting) {
-    return null;
-  }
-
+  if (loading || !examSetting || isExpired) return null;
   const examDate = new Date(examSetting.exam_date);
-
-  if (isExpired) {
-    return null;
-  }
-
   return (
-    <Card className="bg-gradient-to-br from-white via-blue-50 to-indigo-50 p-6 sm:p-8 rounded-2xl shadow-xl border-2 border-blue-200/50 overflow-hidden relative">
-      {/* Decorative background elements */}
-      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-yellow-400/20 to-orange-400/20 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-blue-400/20 to-indigo-400/20 rounded-full blur-2xl"></div>
-      
-      <div className="relative">
-        {/* Header */}
-        <div className="flex items-center justify-center gap-2 mb-2">
-          <Calendar className="h-5 w-5 text-blue-600" />
-          <span className="text-sm font-semibold text-blue-600 uppercase tracking-wider">Countdown to</span>
-        </div>
-        
-        <h3 className="text-xl sm:text-2xl font-bold text-center text-blue-900 mb-6">
-          {examSetting.series_name}
-        </h3>
-
-        {/* Countdown Timer */}
-        <div className="flex items-center justify-center gap-2 sm:gap-4">
-          <TimeBlock value={timeLeft.days} label="Days" />
-          <span className="text-2xl font-bold text-blue-400 mt-[-20px]">:</span>
-          <TimeBlock value={timeLeft.hours} label="Hours" />
-          <span className="text-2xl font-bold text-blue-400 mt-[-20px]">:</span>
-          <TimeBlock value={timeLeft.minutes} label="Mins" />
-          <span className="text-2xl font-bold text-blue-400 mt-[-20px]">:</span>
-          <TimeBlock value={timeLeft.seconds} label="Secs" />
-        </div>
-
-        {/* Exam Date Display */}
-        <div className="mt-6 flex items-center justify-center gap-2 text-blue-700">
-          <Clock className="h-4 w-4" />
-          <span className="text-sm font-medium">
-            {examDate.toLocaleDateString('en-US', { 
-              weekday: 'long', 
-              year: 'numeric', 
-              month: 'long', 
-              day: 'numeric' 
-            })}
-          </span>
-        </div>
-
-        {/* Motivational message */}
-        <p className="text-center text-blue-600/80 text-sm mt-4 italic">
-          &quot;Excellence is not a destination but a continuous journey&quot;
-        </p>
+    <section aria-label="Examination countdown" className="py-8 border-b border-border flex flex-col md:flex-row gap-6 md:items-center md:justify-between">
+      <div>
+        <p className="section-label flex items-center gap-2 mb-2"><Calendar className="h-4 w-4" />Countdown to</p>
+        <h2 className="text-xl font-bold">{examSetting.series_name}</h2>
+        <p className="text-sm text-muted-foreground flex items-start gap-2 mt-2"><Clock className="h-4 w-4 shrink-0 mt-0.5" />{examDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
       </div>
-    </Card>
+      <div className="grid grid-cols-4 gap-3 w-full max-w-sm shrink-0">
+        <TimeBlock value={timeLeft.days} label="Days" />
+        <TimeBlock value={timeLeft.hours} label="Hours" />
+        <TimeBlock value={timeLeft.minutes} label="Minutes" />
+        <TimeBlock value={timeLeft.seconds} label="Seconds" />
+      </div>
+    </section>
   );
 };
-
 export default ExamCountdown;
