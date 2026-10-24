@@ -259,7 +259,7 @@
 @layer components {
   .page-shell { @apply mx-auto w-full max-w-7xl px-5 sm:px-8; }
   .page-heading { @apply border-b border-border bg-secondary/50 py-12; }
-  .section-label { @apply text-xs font-bold uppercase tracking-widest text-primary; }
+  .section-label { @apply text-xs font-bold uppercase tracking-normal text-primary; }
   .school-track:hover { animation-play-state: paused; }
   .hero-photo-shade { background: linear-gradient(90deg, hsl(var(--hero-shade) / .88), hsl(var(--hero-shade) / .48) 55%, hsl(var(--hero-shade) / .10)); }
 }
