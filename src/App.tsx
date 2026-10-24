@@ -38,6 +38,11 @@ import AdminPage from "./pages/AdminPage";
 import AuthPage from "./pages/AuthPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import NotFound from "./pages/NotFound";
+import ResourceCentrePage from "./pages/ResourceCentrePage";
+import NewsPage from "./pages/NewsPage";
+import EventsPage from "./pages/EventsPage";
+import HelpPage from "./pages/HelpPage";
+import NewsManagementPage from "./pages/admin/NewsManagementPage";
 
 const queryClient = new QueryClient();
 
@@ -68,6 +73,11 @@ const App = () => {
               <Route path="/store" element={<StorePage />} />
               <Route path="/almanac" element={<AlmanacPage />} />
               <Route path="/legal" element={<LegalPage />} />
+              <Route path="/resources" element={<ResourceCentrePage />} />
+              <Route path="/news" element={<NewsPage />} />
+              <Route path="/events" element={<EventsPage />} />
+              <Route path="/help" element={<HelpPage />} />
+              <Route path="/admin/news" element={<NewsManagementPage />} />
               <Route path="/admin" element={<AdminPage />} />
               <Route path="/admin/payments" element={<AdminPaymentStatusPage />} />
               <Route path="/admin/store" element={<StoreMaterialsPage />} />
