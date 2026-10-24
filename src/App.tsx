@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { TopNav } from "@/components/TopNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ScrollProgress } from "@/components/ScrollProgress";
@@ -52,7 +52,6 @@ const App = () => {
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
           <div className="flex flex-col min-h-[100dvh] bg-background">
             <ScrollProgress />
             <SecurityTelemetry />
@@ -103,7 +102,6 @@ const App = () => {
               <SiteFooter />
             </div>
           </div>
-        </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
   );
