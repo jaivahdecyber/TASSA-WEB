@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Shield, Users, FileText, Store, DollarSign, BarChart3, LogOut, Settings, Upload, Clock, Calendar, ShieldAlert, Award, Crown, Radar } from 'lucide-react';
+import { Shield, Users, FileText, Store, DollarSign, BarChart3, LogOut, Settings, Upload, Clock, Calendar, ShieldAlert, Award, Crown, Radar, Newspaper } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 
@@ -69,7 +69,7 @@ const AdminPage = () => {
     <div className="min-h-screen py-16 bg-muted/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex flex-col sm:flex-row gap-5 justify-between sm:items-center mb-8">
           <div>
             <h1 className="text-3xl font-heading font-bold text-foreground mb-2">
                Admin Access Only
@@ -92,6 +92,10 @@ const AdminPage = () => {
 
         {/* Admin Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Card>
+            <CardHeader><CardTitle className="flex items-center gap-2"><Newspaper className="h-5 w-5 text-primary" />News & Announcements</CardTitle></CardHeader>
+            <CardContent><p className="text-sm text-muted-foreground mb-4">Manage association updates and published announcements.</p><Button className="w-full" onClick={() => navigate('/admin/news')}>Manage News</Button></CardContent>
+          </Card>
           {/* Hall of Excellence */}
           <Card className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate('/admin/hall-of-excellence')}>
             <CardHeader>
