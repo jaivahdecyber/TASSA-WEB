@@ -1,6 +1,7 @@
-- [ ] Refresh the shared design, navigation, homepage and footer.
-- [ ] Add a searchable school resource centre.
-- [ ] Add public news and admin announcement management using existing data.
-- [ ] Add a browsable events calendar using the published almanac.
-- [ ] Add help and FAQs.
-- [ ] Verify new pages, navigation and narrow-screen layout.
+- [x] Refresh the shared design, navigation, homepage and footer.
+- [x] Add a searchable school resource centre.
+- [x] Add public news and connect admin announcement management using existing data.
+- [x] Add a browsable events calendar using the published almanac.
+- [x] Add help and FAQs.
+- [x] Verify public pages, navigation, searches and narrow-screen layout.
+- [ ] Verify admin news publishing end-to-end (authenticated checks unavailable for the external Supabase connection).
